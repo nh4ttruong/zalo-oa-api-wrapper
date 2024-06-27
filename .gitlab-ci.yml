@@ -1,0 +1,18 @@
+image: python:3.9
+
+stages:
+  - run
+
+run zalo oa api:
+  stage: run
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - cp config/oa-option.config .env
+    - python main.py
+    - rm .env
+  tags:
+    - runner
+  only:
+    - main
+  when: manual
