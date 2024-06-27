@@ -12,4 +12,4 @@ python3 main.py
 ```
 
 ## Authors
-- [@truongtbn](truongtbn@vng.com.vn)
+- [@nh4ttruong](nh4ttruong.me)
