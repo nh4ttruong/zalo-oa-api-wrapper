@@ -1,15 +1,14 @@
-import os
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-load_dotenv()
+config = dotenv_values(".env")
 
-ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
-API_URL_V3 = os.getenv("API_URL_V3")
-API_URL_V2 = os.getenv("API_URL_V2")
-MESSAGE_CONTENT = os.getenv("MESSAGE_CONTENT")
-MESSAGE_FILE_PATH = os.getenv("MESSAGE_FILE_PATH")
-IMAGE_FILE_PATH = os.getenv("IMAGE_FILE_PATH")
-SEND_ALL_USERS = os.getenv("SEND_ALL_USERS")
-SEND_USER_LIST = os.getenv("SEND_USER_LIST")
-SEND_MESSAGE_TEXT = os.getenv("SEND_MESSAGE_TEXT")
-SEND_MESSAGE_WITH_IMAGE = os.getenv("SEND_MESSAGE_WITH_IMAGE")
+API_URL_V2 = config["API_URL_V2"]
+API_URL_V3 = config["API_URL_V3"]
+ZALO_OA_ACCESS_TOKEN = config["ZALO_OA_ACCESS_TOKEN"]
+SEND_ALL_USERS = config["SEND_ALL_USERS"]
+SEND_USER_LIST = config["SEND_USER_LIST"]
+SEND_MESSAGE_TEXT = config["SEND_MESSAGE_TEXT"]
+SEND_MESSAGE_WITH_IMAGE = config["SEND_MESSAGE_WITH_IMAGE"]
+MESSAGE_FILE_PATH = config["MESSAGE_FILE_PATH"]
+IMAGE_FILE_PATH = config["IMAGE_FILE_PATH"]
+MESSAGE_CONTENT = config["MESSAGE_CONTENT"]

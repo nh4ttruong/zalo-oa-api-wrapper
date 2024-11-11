@@ -4,11 +4,11 @@ import time
 from dependencies.load_config import *
 from dependencies.upload import *
 
-def send_text_message(access_token, user_id, message_text=None, message_file=None):
+def send_text_message(ZALO_OA_ACCESS_TOKEN, user_id, message_text=None, message_file=None):
     url = API_URL_V3 + "message/cs"
     headers = {
         "Content-Type": "application/json",
-        "access_token": access_token
+        "ZALO_OA_ACCESS_TOKEN": ZALO_OA_ACCESS_TOKEN
     }
     data = {
         "recipient": {
@@ -34,11 +34,11 @@ def send_text_message(access_token, user_id, message_text=None, message_file=Non
     else:
         return False
 
-def send_message_with_image(access_token, user_id, message_text=None, message_file=None, url=None, attachment_id=None, width=None, height=None):
+def send_message_with_image(ZALO_OA_ACCESS_TOKEN, user_id, message_text=None, message_file=None, url=None, attachment_id=None, width=None, height=None):
     url_api = API_URL_V3 + "message/cs"
     headers = {
         "Content-Type": "application/json",
-        "access_token": access_token
+        "ZALO_OA_ACCESS_TOKEN": ZALO_OA_ACCESS_TOKEN
     }
     data = {
         "recipient": {
@@ -82,7 +82,7 @@ def send_message_with_image(access_token, user_id, message_text=None, message_fi
 
     return response.status_code == 200
 
-def send_message_to_users(access_token, users, message_text=None, message_file=None, url=None, image_file=None, image_type="image", width=None, height=None):
+def send_message_to_users(ZALO_OA_ACCESS_TOKEN, users, message_text=None, message_file=None, url=None, image_file=None, image_type="image", width=None, height=None):
     total_users = len(users)
     send_type = None
 
@@ -102,15 +102,15 @@ def send_message_to_users(access_token, users, message_text=None, message_file=N
         print("({}/{})".format(users.index(user) + 1, total_users), "Sending message to user: ", user_id)
         
         if send_type == "text":
-            send_text_message(access_token, user_id, message_text=message_text, message_file=message_file)
+            send_text_message(ZALO_OA_ACCESS_TOKEN, user_id, message_text=message_text, message_file=message_file)
             time.sleep(0.1)
         elif send_type == "text_with_image":
             if image_file in attachment_ids:
                 attachment_id = attachment_ids[image_file]
             else:
-                attachment_id = upload_media(access_token, file_path=image_file, type=image_type)
+                attachment_id = upload_media(ZALO_OA_ACCESS_TOKEN, file_path=image_file, type=image_type)
                 attachment_ids[image_file] = attachment_id
 
-            send_message_with_image(access_token, user_id, message_text=message_text, message_file=message_file, url=url, attachment_id=attachment_id, width=width, height=height)
+            send_message_with_image(ZALO_OA_ACCESS_TOKEN, user_id, message_text=message_text, message_file=message_file, url=url, attachment_id=attachment_id, width=width, height=height)
             
     return True

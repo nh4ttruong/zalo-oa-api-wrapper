@@ -3,7 +3,7 @@ import json
 import os
 from dependencies.load_config import *
 
-def upload_media(access_token, file_path, type="image"):
+def upload_media(ZALO_OA_ACCESS_TOKEN, file_path, type="image"):
     file_path = os.path.abspath(file_path)
 
     if type == "image":
@@ -14,7 +14,7 @@ def upload_media(access_token, file_path, type="image"):
         raise ValueError("Invalid media type")
 
     headers = {
-        "access_token": access_token
+        "ZALO_OA_ACCESS_TOKEN": ZALO_OA_ACCESS_TOKEN
     }
     files = {
         "file": open(file_path, "rb")
